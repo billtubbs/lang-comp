@@ -27,7 +27,7 @@ Python
 
 ```Python
 def power(x, a):
-    return x\*\*a
+    return x**a
 
 # Lambda function
 power = lambda x, a: x**a
