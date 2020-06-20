@@ -133,16 +133,15 @@ Python
 # Since Python 3.4
 print("{:5.2f}".format(x))
 
-#  1.41
-
 # Since Python 3.6
 print(f"{x:5.2f}")
-
-#  1.41
 
 # 'Old style'
 print("%5.2f" % x)
 
+# Output:
+#  1.41
+#  1.41
 #  1.41
 ```
 
@@ -152,6 +151,7 @@ using Printf
 
 @printf("%5.2f\n", x)
 
+# Output:
 #  1.41
 ```
 
@@ -159,6 +159,7 @@ MATLAB
 ```Matlab
 fprintf("%5.2f\n", x)
 
+# Output:
 %  1.41
 ```
 
@@ -631,15 +632,12 @@ Python
 ```Python
 import numpy as np
 
-A = np.array([[0.8, 0], 
-              [0, 1]])
-K = np.array([[0.942],
-              [1.074]])
+A = np.array([[0.8, 0], [0, 1]])
+K = np.array([[0.942], [1.074]])
 C = np.array([0.2, 1])
 
 # Matrix inverse
-print(np.linalg.inv(np.eye(2) 
-      - A + K*C))
+print(np.linalg.inv(np.eye(2) - A + K*C))
 
 # Output:
 # [[ 5.         -4.38547486]
