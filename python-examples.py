@@ -63,11 +63,16 @@ print(1 - A)
 print(A + x)
 
 # Linear Algebra
-A = np.array([[0.8, 0], 
-              [0, 1]])
-K = np.array([[0.942],
-              [1.074]])
-C = np.array([0.2, 1])
-print(np.linalg.inv(np.eye(2) 
-      - A + K*C))
+A = np.array([[0.8, 0], [0, 1]])
+K = np.array([[0.942],[1.074]])
+C = np.array([[0.2, 1]])
+
+# Matrix inverse
+# Since Python 3.5
+X = np.linalg.inv(np.eye(2) - A + K @ C)
+# Prior to 3.5
+X = np.linalg.inv(np.eye(2) - A + K.dot(C))
+
+print(X)
+
 

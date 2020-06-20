@@ -70,4 +70,6 @@ using LinearAlgebra
 A = [0.8 0; 0 1];
 K = [0.942; 1.074];
 C = [0.2 1];
-println((I - A + K*C)^-1)
+X = (I - A + K*C)^-1
+println(X)
+
