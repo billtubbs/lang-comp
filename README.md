@@ -1,5 +1,4 @@
-# lang-comp
-Comparison of three high-level programming languages for numerical computing.
+# Comparison of three high-level programming languages for numerical computing
 
 ## Objective
 
