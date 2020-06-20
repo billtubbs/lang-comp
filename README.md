@@ -2,7 +2,7 @@
 
 ## Objective
 
-Compare the syntax and ease-of-use of three popular programming languages on basic numerical computation tasks:
+Compare the syntax and ease-of-use of these three popular programming languages on basic numerical computation tasks:
 
 - Python (Python Software Foundation)
 - MATLAB (Mathworks)
@@ -11,10 +11,10 @@ Compare the syntax and ease-of-use of three popular programming languages on bas
 
 ## Things not considered here
 
-- R (www.r-project.org) a high-level language for for statistical computing
+- R (www.r-project.org) a high-level language for statistical computing
 - Capabilities of these languages in other applications
 - A comparison of the performance of these languages
- - See here for example: https://julialang.org/benchmarks/ 
+  - See here for example: https://julialang.org/benchmarks/ 
 - Maturity of the language, available packages and support community
 
 
@@ -130,12 +130,12 @@ x = power(2, 0.5)
 Python
 
 ```Python
-# Since 3.4
+# Since Python 3.4
 print("{:5.2f}".format(x))
 
 #  1.41
 
-# Since 3.6
+# Since Python 3.6
 print(f"{x:5.2f}")
 
 #  1.41
@@ -284,7 +284,6 @@ A = np.array([[1, 2, 3],
 
 # Nd array (2x3x2)
 Z = np.ones((2, 3, 2))
-print(Z)
 
 print(x)
 print(A)
@@ -311,7 +310,7 @@ x = [1, 2, 3]
 # Matrix (2d)
 A = [1 2 3; 4 5 6]
 
-# Nd array (3x3x2)
+# Nd array (2x3x2)
 Z = ones(2, 3, 2)
 
 println(x)
@@ -333,6 +332,9 @@ x = [1, 2, 3]
 
 % Matrix (2d)
 A = [1 2 3; 4 5 6]
+
+% Nd array (2x3x2)
+Z = ones(2, 3, 2)
 
 % Output
 % 
@@ -635,7 +637,7 @@ K = np.array([[0.942],
               [1.074]])
 C = np.array([0.2, 1])
 
-% Matrix inverse
+# Matrix inverse
 print(np.linalg.inv(np.eye(2) 
       - A + K*C))
 
@@ -652,7 +654,7 @@ A = [0.8 0; 0 1];
 K = [0.942; 1.074];
 C = [0.2 1];
 
-% Matrix inverse
+# Matrix inverse
 println((I - A + K*C)^-1)
 
 # Output:
