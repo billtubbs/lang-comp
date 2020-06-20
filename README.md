@@ -637,7 +637,12 @@ K = np.array([[0.942], [1.074]])
 C = np.array([0.2, 1])
 
 # Matrix inverse
-print(np.linalg.inv(np.eye(2) - A + K*C))
+# Since Python 3.5
+X = np.linalg.inv(np.eye(2) - A + K @ C)
+# Prior to 3.5
+X = np.linalg.inv(np.eye(2) - A + K.dot(C))
+
+print(X)
 
 # Output:
 # [[ 5.         -4.38547486]
@@ -653,7 +658,9 @@ K = [0.942; 1.074];
 C = [0.2 1];
 
 # Matrix inverse
-println((I - A + K*C)^-1)
+X = (I - A + K*C)^-1
+
+println(X)
 
 # Output:
 # [5.000000000000001 -4.385474860335195; -1.0000000000000002 1.808193668528864]
@@ -666,7 +673,7 @@ K = [0.942; 1.074];
 C = [0.2 1];
 
 % Matrix inverse
-(eye(2) - A + K*C)^-1
+X = (eye(2) - A + K*C)^-1
 
 % Output
 % 
