@@ -10,7 +10,7 @@ Compare the syntax and ease-of-use of three popular programming languages on bas
 - Julia (https://julialang.org)
 
 
-## Other things not considered here
+## Things not considered here
 
 - R (www.r-project.org) a high-level language for for statistical computing
 - Capabilities of these languages in other applications
@@ -33,7 +33,7 @@ def power(x, a):
 Julia
 ```Julia
 function power(x, a)
-    return x^a
+  return x^a
 end
 ```
 
@@ -420,5 +420,260 @@ size(A)
 % ans =
 % 
 %      2     3
+% 
+```
+
+
+### Indexing arrays
+
+Python
+
+```Python
+# Vector (1d)
+x = np.array([1, 2, 3])
+
+# Matrix (2d)
+A = np.array([[1, 2, 3], 
+              [4, 5, 6]])
+
+print(x[1])
+print(A[1,1])
+print(A[1])
+
+# Output:
+# 2
+# 5
+# [4 5 6]
+```
+
+Julia
+```Julia
+# Vector (1d)
+x = [1, 2, 3]
+
+# Matrix (2d)
+A = [1 2 3; 4 5 6]
+
+println(x[2])
+println(A[2,2])
+println(A[2])
+
+# Output:
+# 2
+# 5
+# 4
+```
+
+MATLAB
+```Matlab
+% Column vector (2d)
+x = [1, 2, 3];
+
+% Matrix (2d)
+A = [1 2 3; 4 5 6];
+
+x(2)
+A(2,2)
+A(2)
+
+
+% Output
+% 
+% ans =
+% 
+%      2
+% 
+% 
+% ans =
+% 
+%      5
+% 
+% 
+% ans =
+% 
+%      4
+% 
+```
+
+
+### Slicing arrays
+
+Python
+
+```Python
+# Vector (1d)
+x = np.array([1, 2, 3])
+
+# Matrix (2d)
+A = np.array([[1, 2, 3], 
+              [4, 5, 6]])
+
+print(x[1:])
+print(A[:,1])
+
+# Output:
+# [2 3]
+# [2 5]
+```
+
+Julia
+```Julia
+# Vector (1d)
+x = [1, 2, 3]
+
+# Matrix (2d)
+A = [1 2 3; 4 5 6]
+
+println(x[2:end])
+println(A[:,2])
+
+# Output:
+# [2, 3]
+# [2, 5]
+```
+
+MATLAB
+```Matlab
+% Column vector (2d)
+x = [1, 2, 3];
+
+% Matrix (2d)
+A = [1 2 3; 4 5 6];
+
+x(2:end)
+A(:,2)
+
+% Output
+% 
+% ans =
+% 
+%      2     3
+% 
+% 
+% ans =
+% 
+%      2
+%      5
+% 
+```
+
+
+### Array broadcasting
+
+Python
+
+```Python
+# Vector (1d)
+x = np.array([1, 2, 3])
+
+# Matrix (2d)
+A = np.array([[1, 2, 3], 
+              [4, 5, 6]])
+
+print(1 - A)
+print(A + x)
+
+# Output:
+# [[ 0 -1 -2]
+#  [-3 -4 -5]]
+# [[2 4 6]
+#  [5 7 9]]
+```
+
+Julia
+```Julia
+# Row vector (2d)
+x = [1 2 3]
+
+# Matrix (2d)
+A = [1 2 3; 4 5 6]
+
+println(1 .- A)
+println(A .+ x)
+
+# Output:
+# [0 -1 -2; -3 -4 -5]
+# [2 4 6; 5 7 9]
+```
+
+MATLAB
+```Matlab
+% Row vector (2d)
+x = [1 2 3];
+
+% Matrix (2d)
+A = [1 2 3; 4 5 6];
+
+1 - A
+A + x
+
+% Output
+% 
+% ans =
+% 
+%      0    -1    -2
+%     -3    -4    -5
+% 
+% 
+% ans =
+% 
+%      2     4     6
+%      5     7     9
+% 
+```
+
+
+### Linear algebra
+
+Python
+
+```Python
+import numpy as np
+
+A = np.array([[0.8, 0], 
+              [0, 1]])
+K = np.array([[0.942],
+              [1.074]])
+C = np.array([0.2, 1])
+
+% Matrix inverse
+print(np.linalg.inv(np.eye(2) 
+      - A + K*C))
+
+# Output:
+# [[ 5.         -4.38547486]
+#  [-1.          1.80819367]]
+```
+
+Julia
+```Julia
+using LinearAlgebra
+
+A = [0.8 0; 0 1];
+K = [0.942; 1.074];
+C = [0.2 1];
+
+% Matrix inverse
+println((I - A + K*C)^-1)
+
+# Output:
+# [5.000000000000001 -4.385474860335195; -1.0000000000000002 1.808193668528864]
+```
+
+MATLAB
+```Matlab
+A = [0.8 0; 0 1]; 
+K = [0.942; 1.074]; 
+C = [0.2 1];
+
+% Matrix inverse
+(eye(2) - A + K*C)^-1
+
+% Output
+% 
+% ans =
+% 
+%     5.0000   -4.3855
+%    -1.0000    1.8082
 % 
 ```
