@@ -634,7 +634,7 @@ import numpy as np
 
 A = np.array([[0.8, 0], [0, 1]])
 K = np.array([[0.942], [1.074]])
-C = np.array([0.2, 1])
+C = np.array([[0.2, 1]])
 
 # Matrix inverse
 # Since Python 3.5
