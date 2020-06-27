@@ -270,6 +270,128 @@ end
 ```
 
 
+### Lists
+
+Python
+```Python
+symbols = ['H', 'He', 'Li']
+print(symbols)
+
+# Output:
+# ['H', 'He', 'Li']
+```
+
+Julia
+```Julia
+symbols = ["H", "He", "Li"]  # Array
+println(symbols)
+
+# Output
+# ["H", "He", "Li"]
+```
+
+MATLAB
+
+```Matlab
+symbols = {'H','He','Li'}  % Cell array
+
+% Output:
+% 
+% symbols =
+% 
+%   1×3 cell array
+% 
+%     {'H'}    {'He'}    {'Li'}
+% 
+```
+
+
+### Dictionaries
+
+Python
+```Python
+elements = {
+    'H': 1,
+    'He': 2, 
+    'Li': 3
+}
+print(elements)
+
+# Output:
+# {'H': 1, 'He': 2, 'Li': 3}
+```
+
+Julia
+```Julia
+elements = Dict(
+    "H" => 1,
+    "He" => 2, 
+    "Li" => 3
+)
+println(elements)
+
+# Output
+# Dict("Li"=>3,"He"=>2,"H"=>1)
+```
+
+MATLAB
+
+```Matlab
+symbols = {'H','He','Li'};
+values = [1 2 3];
+elements = containers.Map(symbols,values)
+
+% Output:
+% 
+% elements = 
+% 
+%   Map with properties:
+% 
+%         Count: 3
+%       KeyType: char
+%     ValueType: double
+% 
+```
+
+### Iterating over collections
+
+Python
+```Python
+for symbol, n in elements.items():
+    print(f"{symbol}: {n}")
+
+# Output:
+# H: 1
+# He: 2
+# Li: 3
+```
+
+Julia
+```Julia
+for (symbol, n) in elements
+  @printf("%s: %d\n", symbol, n)
+end
+
+# Output:
+# H: 1
+# He: 2
+# Li: 3
+```
+
+MATLAB
+```Matlab
+for symbol = keys(elements)
+    n = elements(symbol{1});
+    fprintf("%s: %d\n", symbol{1}, n)
+end
+
+% Output:
+% H: 1
+% He: 2
+% Li: 3
+```
+
+
 ### Array literals
 
 Python
