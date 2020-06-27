@@ -25,6 +25,17 @@ while i <= 5
   i = i + 1;
 end
 
+% Dictionary (container.Map in MATLAB)
+symbols = {'H','He','Li'};
+values = [1 2 3];
+elements = containers.Map(symbols,values)
+
+% Iterating over collections
+for symbol = keys(elements)
+    n = elements(symbol{1});
+    fprintf("%s: %d\n", symbol{1}, n)
+end
+
 % Array literals
 % Vector (1d)
 x = [1, 2, 3]

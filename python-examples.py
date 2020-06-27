@@ -29,6 +29,22 @@ while i < 5:
     print(i)
     i += 1
 
+# List
+symbols = ['H', 'He', 'Li']
+print(symbols)
+
+# Dictionary
+elements = {
+    'H': 1,
+    'He': 2, 
+    'Li': 3
+}
+print(elements)
+
+# Iterating over collections
+for symbol, n in elements.items():
+    print(f"{symbol}: {n}")
+
 # Array literals
 import numpy as np
 

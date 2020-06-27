@@ -31,6 +31,23 @@ while i <= 5
   global i += 1
 end
 
+# List
+symbols = ["H", "He", "Li"]  # Array
+println(symbols)
+
+# Dictionary
+elements = Dict(
+    "H" => 1,
+    "He" => 2, 
+    "Li" => 3
+)
+println(elements)
+
+# Iterating over collections
+for (symbol, n) in elements
+  @printf("%s: %d\n", symbol, n)
+end
+
 # Array literals
 
 # Vector (1d)
