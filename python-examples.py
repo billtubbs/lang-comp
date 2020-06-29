@@ -128,4 +128,17 @@ assert np.array_equiv(dy.T, (160, -16, -136))
 # Speed test results
 # Test 1 - Single function call: 2.42 µs ± 72
 # Test 2 - Single function calls with for loop: 37.4 ms ± 465 µs
-# Test 3- Vectorized function calls: 58.2 µs ± 381 ns
+# Test 3 - Vectorized function calls: 58.2 µs ± 381 ns
+
+# Timing code (use in IPython or Jupyter notebook):
+# n = 10000
+# y = np.random.randn(3, n)
+# y0 = y[:, 0]
+# def make_function_calls(f, y, n, *args, **kwargs):
+#     dy = np.empty_like(y)
+#     for i in range(n):
+#         dy[:, i] = f(y[:, i], *args, **kwargs)
+#     return dy
+# %timeit dy = lorenz(y0, sigma, beta, rho)
+# %timeit dy = make_function_calls(lorenz, y, n, sigma=sigma, beta=beta, rho=rho)
+# %timeit dy = lorenz(y, sigma, beta, rho)
