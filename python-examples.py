@@ -36,7 +36,7 @@ print(symbols)
 # Dictionary
 elements = {
     'H': 1,
-    'He': 2, 
+    'He': 2,
     'Li': 3
 }
 print(elements)
@@ -52,7 +52,7 @@ import numpy as np
 x = np.array([1, 2, 3])
 
 # Matrix (2d)
-A = np.array([[1, 2, 3], 
+A = np.array([[1, 2, 3],
               [4, 5, 6]])
 print(x)
 print(A)
@@ -91,4 +91,41 @@ X = np.linalg.inv(np.eye(2) - A + K.dot(C))
 
 print(X)
 
+# Vectorizable function
+def lorenz(y, sigma, beta, rho):
+    return (sigma * (y[1] - y[0]),
+            y[0] * (rho - y[2]) - y[1],
+            y[0] * y[1] - beta * y[2])
 
+# Parameter values
+beta = 8 / 3
+sigma = 10
+rho = 28
+
+# Test1 - Single function call
+y0 = (-8, 8, 27)
+assert lorenz(y0, sigma, beta, rho) == (160, -16, -136)
+
+# Test 2 - Single function calls with for loop
+def make_function_calls(f, y, n, *args, **kwargs):
+    dy = np.empty_like(y)
+    for i in range(n):
+        dy[:, i] = f(y[:, i], *args, **kwargs)
+    return dy
+
+y = np.repeat(np.array((-8, 8, 27)).reshape(-1,1), 10, axis=1)
+dy = make_function_calls(lorenz, y, 10, sigma=sigma, beta=beta, rho=rho)
+assert dy.shape == y.shape
+assert np.array_equiv(dy.T, (160, -16, -136))
+
+# Test 3 - vectorized function call
+y = np.repeat(np.array((-8, 8, 27)).reshape(-1,1), 10, axis=1)
+dy = lorenz(y, sigma, beta, rho)
+dy = np.vstack(dy)
+assert dy.shape == y.shape
+assert np.array_equiv(dy.T, (160, -16, -136))
+
+# Speed test results
+# Test 1 - Single function call: 2.42 µs ± 72
+# Test 2 - Single function calls with for loop: 37.4 ms ± 465 µs
+# Test 3- Vectorized function calls: 58.2 µs ± 381 ns
