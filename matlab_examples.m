@@ -69,12 +69,68 @@ K = [0.942; 1.074];
 C = [0.2 1];
 (eye(2) - A+K*C)^-1
 
-% Function
-% Functions must go at end of 
-% file or in separate file
+% Vectorizable function
+% Parameter values
+beta = 8 / 3;
+sigma = 10;
+rho = 28;
+
+% Test 1 - Single function call
+y = [-8; 8; 27];
+dy = lorenz(y, sigma, beta, rho);
+assert(all(dy == [160; -16; -136]))
+
+% Test 2 - Single function calls within for loop
+y = repmat([-8, 8, 27], 10, 1)';
+dy = lorenz_loop(y, sigma, beta, rho);
+assert(all(all(dy == [160; -16; -136])))
+
+% Test 3 - vectorized function call
+dy = lorenz_vec(y, sigma, beta, rho);
+assert(all(all(dy == [160; -16; -136])))
+
+disp("Speed tests")
+y = [-8; 8; 27];
+f = @() lorenz(y, sigma, beta, rho);
+t = timeit(f);
+fprintf("Test 1: %f seconds\n", t);
+n = 10000;
+y = randn(3, n);
+f = @() lorenz_loop(y, sigma, beta, rho);
+t = timeit(f);
+fprintf("Test 2: %f seconds\n", t);
+f = @() lorenz_vec(y, sigma, beta, rho);
+t = timeit(f);
+fprintf("Test 3: %f seconds\n", t);
+% Speed test results
+% Test 1: 0.000000 seconds
+% Test 2: 0.002757 seconds 
+% Test 3: 0.000096 seconds
+
+% Note: Functions must go at end of file
+% or in separate file
 function y = power(x, a)
-    y = x^a;
+  y = x^a;
 end
 
+% Scalar function
+function dy = lorenz(y, sigma, beta, rho)
+  dy = [sigma * (y(2) - y(1)); ...
+        y(1) * (rho - y(3)) - y(2); ...
+        y(1) * y(2) - beta * y(3)];
+end
 
+% Looped calls
+function dy = lorenz_loop(y, sigma, beta, rho)
+  dy = zeros(size(y));
+  for i = 1:size(y,2)
+    dy(:,i) = lorenz(y(:,i), sigma, beta, rho);
+  end
+end
 
+% Vectorizable function
+function dy = lorenz_vec(y, sigma, beta, rho)
+  dy = [sigma .* (y(2,:) - y(1,:)); ...
+        y(1,:) .* (rho - y(3,:)) - y(2,:); ...
+        y(1,:) .* y(2,:) - beta .* y(3,:)];
+end
