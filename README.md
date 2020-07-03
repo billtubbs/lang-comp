@@ -32,7 +32,7 @@ def power(x, a):
 Julia
 ```Julia
 function power(x, a)
-  return x^a
+  x^a
 end
 ```
 
