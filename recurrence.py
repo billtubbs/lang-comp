@@ -1,7 +1,7 @@
 # Demonstrates various methods to solve a recurrence
 # equation in Python
 
-from itertools import accumulate
+from itertools import accumulate, chain
 from functools import reduce
 import numpy as np
 #import matplotlib.pyplot as plt
@@ -40,12 +40,16 @@ u_sim[0:25] = 1  # Add force for short period
 x_sol = list(accumulate(u_sim, duffing, initial=x0))
 assert len(x_sol) == nT + 1
 
+# Uncomment to make plot:
+#plot_trajectory(t_sim, x_sol, u_sim, title="Duffing's Oscillator")
+
+# Prior to Python 3.8, this method was necessary
+x_sol0 = list(accumulate(chain([x0], u_sim), duffing))
+assert all([x1 == x2 for (x1, x2) in zip(x_sol0, x_sol)])
+
 # Builtin reduce can be used to get final value
 x_final = reduce(duffing, u_sim, x0)
 assert np.allclose(x_final, x_sol[-1])
-
-# Uncomment to make plot:
-#plot_trajectory(t_sim, x_sol, u_sim, title="Duffing's Oscillator")
 
 # Equivalent computation with a for loop
 def solve_recurrence(x0, f, u):
@@ -65,6 +69,8 @@ assert all([x1 == x2 for (x1, x2) in zip(x_sol3, x_sol)])
 
 
 # Speed test results
+# x_sol0 = list(accumulate(chain([x0], u_sim), duffing))
+# 436 µs ± 9.77 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 # x_sol = list(accumulate(u_sim, duffing, initial=x0))
 # 426 µs ± 10.2 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 # x_sol2 = solve_recurrence(x0, duffing, u_sim)
