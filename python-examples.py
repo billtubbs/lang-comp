@@ -125,10 +125,19 @@ dy = np.vstack(dy)
 assert dy.shape == y.shape
 assert np.array_equiv(dy.T, (160, -16, -136))
 
+# Test 4 - Numpy apply method (slowest, not vectorized)
+dy = np.apply_along_axis(lorenz, 0, y, sigma=sigma, beta=beta, rho=rho)
+assert dy.shape == y.shape
+assert np.array_equiv(dy.T, (160, -16, -136))
+
+# Test 5 - Numpy vectorized function
+vlorenz = np.vectorize(lorenz, excluded={"sigma", "beta", "rho"})
+
 # Speed test results
-# Test 1 - Single function call: 2.42 µs ± 72
-# Test 2 - Single function calls with for loop: 37.4 ms ± 465 µs
-# Test 3 - Vectorized function calls: 58.2 µs ± 381 ns
+# Test 1 - Single function call: 504 ns ± 6.08 ns
+# Test 2 - Single function calls with for loop: 37.2 ms ± 302 µs
+# Test 3 - Vectorized function calls: 59.0 µs ± 381 ns
+# Test 4 - Numpy apply method 54.7 ms ± 511 µs
 
 # Timing code (use in IPython or Jupyter notebook):
 # n = 10000
@@ -140,5 +149,15 @@ assert np.array_equiv(dy.T, (160, -16, -136))
 #         dy[:, i] = f(y[:, i], *args, **kwargs)
 #     return dy
 # %timeit dy = lorenz(y0, sigma, beta, rho)
-# %timeit dy = make_function_calls(lorenz, y, n, sigma=sigma, beta=beta, rho=rho)
+# %timeit dy = make_function_calls(lorenz, y, n, sigma=sigma,
+#                                  beta=beta, rho=rho)
 # %timeit dy = lorenz(y, sigma, beta, rho)
+# %timeit dy = np.apply_along_axis(lorenz, 0, y, sigma=sigma,
+#                                  beta=beta, rho=rho)
+
+
+# Lorenz system with forcing
+def lorenz(y, u, sigma=10, beta=8/3, rho=28):
+    return (sigma * (y[1] - y[0]) + u,
+            y[0] * (rho - y[2]) - y[1],
+            y[0] * y[1] - beta * y[2])
