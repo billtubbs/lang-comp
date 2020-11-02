@@ -91,6 +91,15 @@ X = np.linalg.inv(np.eye(2) - A + K.dot(C))
 
 print(X)
 
+# Symbolic math
+from sympy import symbols, solve, diff
+x, y = symbols('x y')
+y = x**2 - 2*x + 1
+dydx = diff(y,x)
+print(dydx)
+x_min = solve(dydx,x)
+print(x_min)
+
 # Vectorizable function
 def lorenz(y, sigma, beta, rho):
     return (sigma * (y[1] - y[0]),

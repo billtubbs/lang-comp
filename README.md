@@ -806,3 +806,58 @@ X = (eye(2) - A + K*C)^-1
 %    -1.0000    1.8082
 % 
 ```
+
+### Symbolic Math
+
+
+Python
+
+```Python
+from sympy import symbols, solve, diff
+x, y = symbols('x y')
+y = x**2 - 2*x + 1
+dydx = diff(y,x)
+print(dydx)
+x_min = solve(dydx,x)
+print(x_min)
+
+# Output:
+# 2*x - 2
+# [1]
+```
+
+Julia
+```Julia
+y = :(x^2 - 2*x + 1)  # Symbolic expressions are built in
+using Reduce
+dydx = Algebra.df(y,:x)
+x_min = Algebra.solve(dydx,:x)
+println(y)
+println(dydx)
+println(x_min)
+
+# Output:
+# (x ^ 2 - 2x) + 1
+# 2 * (x - 1)
+# (:(x = 1),)
+```
+
+MATLAB
+```Matlab
+syms x y
+y = x^2 - 2*x + 1;
+dydx = diff(y,x)
+x_min = solve(dydx,x)
+
+% Output
+% 
+% dydx =
+% 
+% 2*x - 2
+%  
+%  
+% x_min =
+%  
+% 1
+%  
+```

@@ -69,6 +69,12 @@ K = [0.942; 1.074];
 C = [0.2 1];
 (eye(2) - A+K*C)^-1
 
+% Symbolic math
+syms x y
+y = x^2 - 2*x + 1;
+dydx = diff(y,x)
+x_min = solve(dydx,x)
+
 % Vectorizable function
 % Parameter values
 beta = 8 / 3;

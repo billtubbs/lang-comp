@@ -32,8 +32,8 @@ while i <= 5
 end
 
 # List
-symbols = ["H", "He", "Li"]  # Array
-println(symbols)
+elements = ["H", "He", "Li"]  # Array
+println(elements)
 
 # Dictionary
 elements = Dict(
@@ -84,12 +84,20 @@ println(A .+ x)
 
 # Linear algebra
 using LinearAlgebra
-A = [0.8 0; 0 1];
-K = [0.942; 1.074];
-C = [0.2 1];
+A = [0.8 0; 0 1]
+K = [0.942; 1.074]
+C = [0.2 1]
 X = (I - A + K*C)^-1
 println(X)
 
+# Symbolic math
+y = :(x^2 - 2*x + 1)
+using Reduce
+dydx = Algebra.df(y,:x)
+x_min = Algebra.solve(dydx,:x)
+println(y)
+println(dydx)
+println(x_min)
 
 # Non-vectorized method
 function lorenz(y1, y2, y3, sigma::Float64, 
