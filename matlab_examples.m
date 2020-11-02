@@ -71,7 +71,7 @@ C = [0.2 1];
 
 % Symbolic math
 syms x y
-y = x^2 - 2*x + 1;
+y = x^2 - 2*x + 1
 dydx = diff(y,x)
 x_min = solve(dydx,x)
 

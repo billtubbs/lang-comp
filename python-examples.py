@@ -96,8 +96,9 @@ from sympy import symbols, solve, diff
 x, y = symbols('x y')
 y = x**2 - 2*x + 1
 dydx = diff(y,x)
-print(dydx)
 x_min = solve(dydx,x)
+print(y)
+print(dydx)
 print(x_min)
 
 # Vectorizable function
