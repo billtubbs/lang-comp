@@ -8,8 +8,7 @@ Compare the syntax and ease-of-use of these three popular programming languages 
 - MATLAB (Mathworks)
 - Julia (https://julialang.org)
 
-
-## Things not considered here
+### Other things not considered here
 
 - R (www.r-project.org) a high-level language for statistical computing
 - Capabilities of these languages in other applications
@@ -19,6 +18,27 @@ Compare the syntax and ease-of-use of these three popular programming languages 
 
 
 ## Language Comparison – Examples
+
+The following sections contain code examples in each language for the following features:
+
++ [Function definition](#function-definition)
++ [One-line functions](#one-line-functions)
++ [Variable assignment](#variable-assignment)
++ [Standard output](#standard-output)
++ [Formatted output](#formatted-output)
++ [Definite loop](#definite-loop)
++ [Indefinite loop](#indefinite-loop)
++ [Lists](#lists)
++ [Dictionaries](#dictionaries)
++ [Iterating over collections](#iterating-over-collections)
++ [Array literals](#array-literals)
++ [Array dimensions](#array-dimensions)
++ [Indexing arrays](#indexing-arrays)
++ [Slicing arrays](#slicing-arrays)
++ [Array broadcasting](#array-broadcasting)
++ [Linear algebra](#linear-algebra)
++ [Symbolic Math](#symbolic-math)
+
 
 ### Function definition
 
