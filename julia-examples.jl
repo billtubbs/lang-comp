@@ -91,13 +91,14 @@ X = (I - A + K*C)^-1
 println(X)
 
 # Symbolic math
-y = :(x^2 - 2*x + 1)
+y = :(a*x^2 + b*x + c)  # Symbolic expressions are built in
 using Reduce
 dydx = Algebra.df(y,:x)
-x_min = Algebra.solve(dydx,:x)
-println(y)
+x_sol = Algebra.solve(dydx,:x)
+y_sol = Algebra.sub(x_sol,y)
 println(dydx)
-println(x_min)
+println(x_sol)
+println(y_sol)
 
 # Non-vectorized method
 function lorenz(y1, y2, y3, sigma::Float64, 

@@ -70,10 +70,11 @@ C = [0.2 1];
 (eye(2) - A+K*C)^-1
 
 % Symbolic math
-syms x y
-y = x^2 - 2*x + 1
+syms a b c x
+y = a*x^2 + b*x + c;
 dydx = diff(y,x)
-x_min = solve(dydx,x)
+x_sol = solve(dydx,x)
+y_sol = subs(y,x,x_sol)
 
 % Vectorizable function
 % Parameter values

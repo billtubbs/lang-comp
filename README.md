@@ -814,57 +814,60 @@ Python
 
 ```Python
 from sympy import symbols, solve, diff
-x, y = symbols('x y')
-y = x**2 - 2*x + 1
-dydx = diff(y,x)
-x_min = solve(dydx,x)
-print(y)
+a, b, c, x = symbols('a b c x')
+y = a*x**2 + b*x + c
+dydx = diff(y, x)
+x_sol = solve(dydx, x)
+y_sol = y.subs(x, x_sol[0])
 print(dydx)
-print(x_min)
+print(x_sol)
+print(y_sol)
 
 # Output:
-# x**2 - 2*x + 1
-# 2*x - 2
-# [1]
+# 2*a*x + b
+# [-b/(2*a)]
+# c - b**2/(4*a)
 ```
 
 Julia
 ```Julia
-y = :(x^2 - 2*x + 1)  # Symbolic expressions are built in
+y = :(a*x^2 + b*x + c)  # Symbolic expressions are built in
 using Reduce
 dydx = Algebra.df(y,:x)
-x_min = Algebra.solve(dydx,:x)
-println(y)
+x_sol = Algebra.solve(dydx,:x)
+y_sol = Algebra.sub(x_sol,y)
 println(dydx)
-println(x_min)
+println(x_sol)
+println(y_sol)
 
 # Output:
-# (x ^ 2 - 2x) + 1
-# 2 * (x - 1)
-# (:(x = 1),)
+# 2 * a * x + b
+# (:(x = -b / (2a)),)
+# (4 * a * c - b ^ 2) / (4a)
 ```
 
 MATLAB
 ```Matlab
-syms x y
-y = x^2 - 2*x + 1;
+syms a b c x
+y = a*x^2 + b*x + c;
 dydx = diff(y,x)
-x_min = solve(dydx,x)
+x_sol = solve(dydx,x)
+y_sol = subs(y,x,x_sol)
 
 % Output
 % 
-% y =
-% 
-% x^2 - 2*x + 1
-% 
-% 
 % dydx =
-% 
-% 2*x - 2
+%  
+% b + 2*a*x
 %  
 %  
 % x_min =
 %  
-% 1
+% -b/(2*a)
+%  
+%  
+% y_min =
+%  
+% - b^2/(4*a) + c
 %  
 ```

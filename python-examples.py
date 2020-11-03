@@ -93,13 +93,14 @@ print(X)
 
 # Symbolic math
 from sympy import symbols, solve, diff
-x, y = symbols('x y')
-y = x**2 - 2*x + 1
-dydx = diff(y,x)
-x_min = solve(dydx,x)
-print(y)
+a, b, c, x = symbols('a b c x')
+y = a*x**2 + b*x + c
+dydx = diff(y, x)
+x_sol = solve(dydx, x)
+y_sol = y.subs(x, x_sol[0])
 print(dydx)
-print(x_min)
+print(x_sol)
+print(y_sol)
 
 # Vectorizable function
 def lorenz(y, sigma, beta, rho):
