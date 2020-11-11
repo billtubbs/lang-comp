@@ -179,7 +179,7 @@ MATLAB
 ```Matlab
 fprintf("%5.2f\n", x)
 
-# Output:
+% Output:
 %  1.41
 ```
 
