@@ -5,9 +5,15 @@
 function power(x, a)
   x^a
 end
+three_squared = power(3, 2)
+
+# Anonymous function
+power2 = (x, a) ->  x^a
+@assert(power2(3, 2) == power(3, 2))
 
 # Assignment form
-power(x, a) = x^a
+power3(x, a) = x^a
+@assert(power3(3, 2) == power(3, 2))
 
 # Variable assignment
 x = power(2, 0.5)
