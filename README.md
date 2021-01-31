@@ -67,7 +67,7 @@ end
 ```
 
 
-### One-line functions
+### Anonymous functions
 
 Python
 
@@ -78,8 +78,11 @@ power = lambda x, a: x**a
 
 Julia
 ```Julia
+# Anonymous function
+power = (x, a) ->  x^a
+
 # Assignment form
-power(x, a) = x^a
+power2(x, a) = x^a
 ```
 
 MATLAB
