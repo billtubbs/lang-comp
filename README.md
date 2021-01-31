@@ -54,6 +54,9 @@ Julia
 function power(x, a)
   x^a
 end
+
+# Assignment form
+power2(x, a) = x^a
 ```
 
 MATLAB
@@ -80,9 +83,6 @@ Julia
 ```Julia
 # Anonymous function
 power = (x, a) ->  x^a
-
-# Assignment form
-power2(x, a) = x^a
 ```
 
 MATLAB
