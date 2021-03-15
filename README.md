@@ -35,6 +35,7 @@ The following sections contain code examples in each language for the following 
 + [Array dimensions](#array-dimensions)
 + [Indexing arrays](#indexing-arrays)
 + [Slicing arrays](#slicing-arrays)
++ [Array concatenation](#array-concatenation)
 + [Array broadcasting](#array-broadcasting)
 + [Linear algebra](#linear-algebra)
 + [Symbolic Math](#symbolic-math)
@@ -360,7 +361,7 @@ println(elements)
 MATLAB
 
 ```Matlab
-symbols = {'H','He','Li'};
+symbols = {'H','He','Li'};  % numeric or cell arrays only
 values = [1 2 3];
 elements = containers.Map(symbols,values)
 
@@ -450,6 +451,7 @@ print(Z)
 # 
 #        [[1., 1., 1.],
 #         [1., 1., 1.]]])
+# 
 ```
 
 Julia
@@ -478,6 +480,7 @@ println(Z)
 # [1.0 1.0; 1.0 1.0; 1.0 1.0]
 # 
 # [1.0 1.0; 1.0 1.0; 1.0 1.0]
+# 
 ```
 
 MATLAB
