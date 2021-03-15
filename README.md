@@ -35,6 +35,7 @@ The following sections contain code examples in each language for the following 
 + [Array dimensions](#array-dimensions)
 + [Indexing arrays](#indexing-arrays)
 + [Slicing arrays](#slicing-arrays)
++ [Array concatenation](#array-concatenation)
 + [Array broadcasting](#array-broadcasting)
 + [Linear algebra](#linear-algebra)
 + [Symbolic Math](#symbolic-math)
@@ -360,7 +361,7 @@ println(elements)
 MATLAB
 
 ```Matlab
-symbols = {'H','He','Li'};
+symbols = {'H','He','Li'};  % numeric or cell arrays only
 values = [1 2 3];
 elements = containers.Map(symbols,values)
 
@@ -426,11 +427,12 @@ import numpy as np
 x = np.array([1, 2, 3])
 
 # Matrix (2d)
-A = np.array([[1, 2, 3], 
-              [4, 5, 6]])
+A = np.array([[1, 2],
+              [3, 4],
+              [5, 6]])
 
-# Nd array (2x3x2)
-Z = np.ones((2, 3, 2))
+# 3d array (3x2x3)
+Z = np.ones((3, 2, 3))
 
 print(x)
 print(A)
@@ -438,27 +440,33 @@ print(Z)
 
 # Output:
 # [1 2 3]
-# [[1 2 3]
-#  [4 5 6]]
-# [[[1. 1.]
-#   [1. 1.]
-#   [1. 1.]]
+# [[1 2]
+#  [3 4]
+#  [5 6]]
+# array([[[1., 1., 1.],
+#         [1., 1., 1.]],
 # 
-#  [[1. 1.]
-#   [1. 1.]
-#   [1. 1.]]]
+#        [[1., 1., 1.],
+#         [1., 1., 1.]],
+# 
+#        [[1., 1., 1.],
+#         [1., 1., 1.]]])
+# 
 ```
 
 Julia
+
 ```Julia
 # Vector (1d)
 x = [1, 2, 3]
+println(x)
 
 # Matrix (2d)
-A = [1 2 3; 4 5 6]
+A = [1 2; 3 4; 5 6]
+println(A)
 
-# Nd array (2x3x2)
-Z = ones(2, 3, 2)
+# 3d array (3x2x3)
+Z = ones(3, 2, 3)
 
 println(x)
 println(A)
@@ -466,22 +474,25 @@ println(Z)
 
 # Output:
 # [1, 2, 3]
-# [1 2 3; 4 5 6]
-# [1.0 1.0 1.0; 1.0 1.0 1.0]
+# [1 2; 3 4; 5 6]
+# [1.0 1.0; 1.0 1.0; 1.0 1.0]
 # 
-# [1.0 1.0 1.0; 1.0 1.0 1.0]
+# [1.0 1.0; 1.0 1.0; 1.0 1.0]
+# 
+# [1.0 1.0; 1.0 1.0; 1.0 1.0]
+# 
 ```
 
 MATLAB
 ```Matlab
-% Column vector (2d)
-x = [1, 2, 3]
+% Row vector (2d)
+x = [1 2 3]  % or x = [1, 2, 3]
 
 % Matrix (2d)
-A = [1 2 3; 4 5 6]
+A = [1 2; 3 4; 5 6]
 
-% Nd array (2x3x2)
-Z = ones(2, 3, 2)
+% 3d array (3x2x3)
+Z = ones(3, 2, 3)
 
 % Output
 % 
@@ -492,20 +503,30 @@ Z = ones(2, 3, 2)
 % 
 % A =
 % 
-%      1     2     3
-%      4     5     6
+%      1     2
+%      3     4
+%      5     6
 % 
 % 
 % Z(:,:,1) =
 % 
-%      1     1     1
-%      1     1     1
+%      1     1
+%      1     1
+%      1     1
 % 
 % 
 % Z(:,:,2) =
 % 
-%      1     1     1
-%      1     1     1
+%      1     1
+%      1     1
+%      1     1
+% 
+% 
+% Z(:,:,3) =
+% 
+%      1     1
+%      1     1
+%      1     1
 % 
 ```
 
@@ -520,15 +541,21 @@ import numpy as np
 x = np.array([1, 2, 3])
 
 # Matrix (2d)
-A = np.array([[1, 2, 3], 
-              [4, 5, 6]])
+A = np.array([[1, 2],
+              [3, 4],
+              [5, 6]])
+
+# 3d array (3x2x3)
+Z = np.ones((3, 2, 3))
 
 print(x.shape)
 print(A.shape)
+print(Z.shape)
 
 # Output:
 # (3,)
-# (2, 3)
+# (3, 2)
+# (3, 2, 3)
 ```
 
 Julia
@@ -537,26 +564,35 @@ Julia
 x = [1, 2, 3]
 
 # Matrix (2d)
-A = [1 2 3; 4 5 6]
+A = [1 2; 3 4; 5 6]
+
+# 3d array (3x2x3)
+Z = ones(3, 2, 3)
 
 println(size(x))
 println(size(A))
+println(size(Z))
 
 # Output:
 # (3,)
 # (2, 3)
+# (3, 2, 3)
 ```
 
 MATLAB
 ```Matlab
-% Column vector (2d)
-x = [1, 2, 3];
+% Row vector (2d)
+x = [1 2 3]  % or x = [1, 2, 3]
 
 % Matrix (2d)
-A = [1 2 3; 4 5 6];
+A = [1 2; 3 4; 5 6]
+
+% 3d array (3x2x3)
+Z = ones(3, 2, 3)
 
 size(x)
 size(A)
+size(Z)
 
 % Output
 % 
@@ -567,7 +603,12 @@ size(A)
 % 
 % ans =
 % 
-%      2     3
+%      3     2
+% 
+% 
+% ans =
+% 
+%      3     2     3
 % 
 ```
 
@@ -581,8 +622,9 @@ Python
 x = np.array([1, 2, 3])
 
 # Matrix (2d)
-A = np.array([[1, 2, 3], 
-              [4, 5, 6]])
+A = np.array([[1, 2],
+              [3, 4],
+              [5, 6]])
 
 print(x[1])
 print(A[1,1])
@@ -590,8 +632,8 @@ print(A[1])
 
 # Output:
 # 2
-# 5
-# [4 5 6]
+# 4
+# [3 4]
 ```
 
 Julia
@@ -600,7 +642,7 @@ Julia
 x = [1, 2, 3]
 
 # Matrix (2d)
-A = [1 2 3; 4 5 6]
+A = [1 2; 3 4; 5 6]
 
 println(x[2])
 println(A[2,2])
@@ -608,17 +650,17 @@ println(A[2])
 
 # Output:
 # 2
-# 5
 # 4
+# 3
 ```
 
 MATLAB
 ```Matlab
-% Column vector (2d)
-x = [1, 2, 3];
+% Row vector (2d)
+x = [1 2 3]  % or x = [1, 2, 3]
 
 % Matrix (2d)
-A = [1 2 3; 4 5 6];
+A = [1 2; 3 4; 5 6]
 
 x(2)
 A(2,2)
@@ -634,12 +676,12 @@ A(2)
 % 
 % ans =
 % 
-%      5
+%      4
 % 
 % 
 % ans =
 % 
-%      4
+%      3
 % 
 ```
 
@@ -653,15 +695,16 @@ Python
 x = np.array([1, 2, 3])
 
 # Matrix (2d)
-A = np.array([[1, 2, 3], 
-              [4, 5, 6]])
+A = np.array([[1, 2],
+              [3, 4],
+              [5, 6]])
 
 print(x[1:])
 print(A[:,1])
 
 # Output:
 # [2 3]
-# [2 5]
+# [2 4 6]
 ```
 
 Julia
@@ -670,23 +713,23 @@ Julia
 x = [1, 2, 3]
 
 # Matrix (2d)
-A = [1 2 3; 4 5 6]
+A = [1 2; 3 4; 5 6]
 
 println(x[2:end])
 println(A[:,2])
 
 # Output:
 # [2, 3]
-# [2, 5]
+# [2, 4, 6]
 ```
 
 MATLAB
 ```Matlab
-% Column vector (2d)
-x = [1, 2, 3];
+% Row vector (2d)
+x = [1 2 3]  % or x = [1, 2, 3]
 
 % Matrix (2d)
-A = [1 2 3; 4 5 6];
+A = [1 2; 3 4; 5 6]
 
 x(2:end)
 A(:,2)
@@ -701,7 +744,73 @@ A(:,2)
 % ans =
 % 
 %      2
-%      5
+%      4
+%      6
+% 
+```
+
+
+### Array concatenation
+
+Python
+
+```Python
+# Vector (1d)
+x = np.array([1, 2, 3])
+
+# Matrix (2d)
+A = np.array([[1, 2],
+              [3, 4],
+              [5, 6]])
+
+# Concatenation of vector and 2-d array
+C = np.hstack([x.reshape(-1, 1), A])
+# or
+C = np.column_stack([x, A])
+print(C)
+
+# Output:
+# [[1 1 2]
+#  [2 3 4]
+#  [3 5 6]]
+```
+
+Julia
+```Julia
+# Vector (1d)
+x = [1, 2, 3]
+println(x)
+
+# Matrix (2d)
+A = [1 2; 3 4; 5 6]
+println(A)
+
+# Concatenation of vector and 2-d array
+C = [x A]
+println(C)
+
+# Output
+# [1 1 2; 2 3 4; 3 5 6]
+```
+
+MATLAB
+```Matlab
+% Row vector (2d)
+x = [1 2 3]  % or x = [1, 2, 3]
+
+% Matrix (2d)
+A = [1 2; 3 4; 5 6]
+
+% Concatenation of vector and 2-d array
+C = [x' A]
+
+% Output
+% 
+% C =
+% 
+%      1     1     2
+%      2     3     4
+%      3     5     6
 % 
 ```
 
@@ -715,17 +824,21 @@ Python
 x = np.array([1, 2, 3])
 
 # Matrix (2d)
-A = np.array([[1, 2, 3], 
-              [4, 5, 6]])
+A = np.array([[1, 2],
+              [3, 4],
+              [5, 6]])
 
+# Array broadcasting
 print(1 - A)
-print(A + x)
+print(A + x.reshape(-1, 1))
 
 # Output:
-# [[ 0 -1 -2]
-#  [-3 -4 -5]]
-# [[2 4 6]
-#  [5 7 9]]
+# [[ 0 -1]
+#  [-2 -3]
+#  [-4 -5]]
+# [[2 3]
+#  [5 6]
+#  [8 9]]
 ```
 
 Julia
@@ -734,39 +847,41 @@ Julia
 x = [1 2 3]
 
 # Matrix (2d)
-A = [1 2 3; 4 5 6]
+A = [1 2; 3 4; 5 6]
 
 println(1 .- A)
 println(A .+ x)
 
 # Output:
-# [0 -1 -2; -3 -4 -5]
-# [2 4 6; 5 7 9]
+# [0 -1; -2 -3; -4 -5]
+# [2 3; 5 6; 8 9]
 ```
 
 MATLAB
 ```Matlab
 % Row vector (2d)
-x = [1 2 3];
+x = [1 2 3]  % or x = [1, 2, 3]
 
 % Matrix (2d)
-A = [1 2 3; 4 5 6];
+A = [1 2; 3 4; 5 6]
 
-1 - A
-A + x
+1-A
+A+x'
 
 % Output
 % 
 % ans =
 % 
-%      0    -1    -2
-%     -3    -4    -5
+%      0    -1
+%     -2    -3
+%     -4    -5
 % 
 % 
 % ans =
 % 
-%      2     4     6
-%      5     7     9
+%      2     3
+%      5     6
+%      8     9
 % 
 ```
 
@@ -831,7 +946,6 @@ X = (eye(2) - A + K*C)^-1
 ```
 
 ### Symbolic Math
-
 
 Python
 
