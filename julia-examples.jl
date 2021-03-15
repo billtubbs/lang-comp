@@ -61,16 +61,17 @@ x = [1, 2, 3]
 println(x)
 
 # Matrix (2d)
-A = [1 2 3; 4 5 6]
+A = [1 2; 3 4; 5 6]
 println(A)
 
-# Nd array (2x3x2)
-Z = ones(2, 3, 2)
+# 3d array (3x2x3)
+Z = ones(3, 2, 3)
 println(Z)
 
 # Array dimensions
 println(size(x))
 println(size(A))
+println(size(Z))
 
 # Indexing arrays
 println(x[2])
@@ -81,8 +82,9 @@ println(A[2])
 println(x[2:end])
 println(A[:,2])
 
-# Row vector (2d)
-x = [1 2 3]
+# Concatenation of vector and 2-d array
+C = [x A]
+println(C)
 
 # Array broadcasting
 println(1 .- A)

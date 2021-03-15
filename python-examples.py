@@ -52,18 +52,20 @@ import numpy as np
 x = np.array([1, 2, 3])
 
 # Matrix (2d)
-A = np.array([[1, 2, 3],
-              [4, 5, 6]])
+A = np.array([[1, 2],
+              [3, 4],
+              [5, 6]])
 print(x)
 print(A)
 
-# Nd array (2x3x2)
-Z = np.ones((2, 3, 2))
+# 3d array (3x2x3)
+Z = np.ones((3, 2, 3))
 print(Z)
 
 # Array dimensions
 print(x.shape)
 print(A.shape)
+print(Z.shape)
 
 # Indexing arrays
 print(x[1])
@@ -74,9 +76,15 @@ print(A[1])
 print(x[1:])
 print(A[:,1])
 
+# Concatenation of vector and 2-d array
+C = np.hstack([x.reshape(-1, 1), A])
+# or
+C = np.column_stack([x, A])
+print(C)
+
 # Array broadcasting
 print(1 - A)
-print(A + x)
+print(A + x.reshape(-1, 1))
 
 # Linear Algebra
 A = np.array([[0.8, 0], [0, 1]])
